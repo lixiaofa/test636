@@ -7,33 +7,26 @@
     "strict": true,
     "skipLibCheck": true,
     "jsx": "preserve",
+    "isolatedModules": true,
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "types": [
-      "vite/client",
-      "node"
-    ],
+    "lib": ["esnext", "dom"],
+    "types": ["vite/client", "node", "unplugin-vue-macros/macros-global"],
     "paths": {
       "@/*": ["src/*"],
       "@common/*": ["src/common/*"],
       "@components/*": ["src/components/*"],
       "@store/*": ["src/store/*"],
-      "@views/*": ["src/views/*"],
+      "@views/*": ["src/views/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "vueCompilerOptions": {
+    "plugins": [
+      // ...
+      "@vue-macros/volar/jsx-directive"
+    ]
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["node_modules", "dist"]
 }

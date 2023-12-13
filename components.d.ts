@@ -9,9 +9,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ElAutoResizer: typeof import('element-plus/es')['ElAutoResizer']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElTableV2: typeof import('element-plus/es')['ElTableV2']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
-    VanButton: typeof import('vant/es')['Button']
+    InputCell: typeof import('./src/components/input-cell.vue')['default']
   }
 }

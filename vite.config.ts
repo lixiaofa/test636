@@ -1,7 +1,10 @@
 import { defineConfig } from 'vite';
+import VueMacros from 'unplugin-vue-macros/vite';
 import vue from '@vitejs/plugin-vue';
+import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import { VantResolver } from 'unplugin-vue-components/resolvers';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import viteESLint from 'vite-plugin-eslint';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
@@ -13,18 +16,25 @@ function resolve(dir: string) {
 // https://github.com/vitejs/vite/issues/1930 .env
 export default defineConfig({
   plugins: [
-    vue(),
+    VueMacros({
+      plugins: {
+        vue: vue(),
+        vueJsx: vueJsx() // 如果需要
+      }
+    }),
+
     viteESLint(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()]
+    }),
     Components({
-      resolvers: [VantResolver()]
+      resolvers: [ElementPlusResolver()]
     })
   ],
   resolve: {
     alias: {
       '@': resolve('./src'),
-      '@common': resolve('./src/common'),
-      '@components': resolve('./src/components'),
-      '@store': resolve('./src/store'),
+
       '@views': resolve('./src/views')
     }
   }
