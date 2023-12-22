@@ -17,6 +17,7 @@ function resolve(dir: string) {
 export default defineConfig({
   plugins: [
     VueMacros({
+      shortEmits: true,
       plugins: {
         vue: vue(),
         vueJsx: vueJsx() // 如果需要
