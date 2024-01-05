@@ -1,31 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-/* import { watchEffect } from 'vue'
-interface Props {
-  input: string
-}
 
-const {
-  input
-} = defineProps<Props>()
 
-watchEffect(() => {
-  // 会在 props 变化时打印
-  console.log(input)
-}) */
+const modelValue = ref('1')
 
-const value = ref(1)
-const clickhandler = () => {
-  value.value++
+const emit = defineEmits<{
+  (e: 'update:modelValue', val: string): void
+}>()
+
+const updateModelValue = (val) => {
+  console.log('val', val)
+  emit('update:modelValue', modelValue.value)
 }
 </script>
 
 <template>
   <div>
     子组件
-    <button @click="clickhandler">add</button>
-    <slot name="header" :value="value" :count="7"></slot>
-  </div>
 
-  <!-- {{ input }} -->
+    <slot name="header" :modelValue="modelValue" @update:modelValue="updateModelValue"></slot>
+  </div>
 </template>
